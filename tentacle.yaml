@@ -1,0 +1,26 @@
+name: ledger
+version: "0.1.0"
+license: free
+runtime: binary
+binary: handler.sh
+actions:
+  - ping
+  - append
+  - list
+  - where
+  - clear
+timeout_sec: 20
+data_dir: data
+needs_docker: false
+platforms:
+  linux-amd64: { tested: false, binary: handler.sh }
+  linux-arm64: { tested: false, binary: handler.sh }
+  darwin-amd64: { tested: true, binary: handler.sh }
+  darwin-arm64: { tested: false, binary: handler.sh }
+  windows-amd64: { tested: false, binary: handler.sh }
+  windows-arm64: { tested: false, binary: handler.sh }
+description: >
+  Append-only JSONL of kraken run results. Local only, no secrets, no network.
+  Every entry records what ran and whether it worked. Nothing else is kept:
+  a value that reaches the ledger is redacted, because a log that outlives the
+  run is exactly where a secret goes to hide.
